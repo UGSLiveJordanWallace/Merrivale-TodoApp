@@ -88,9 +88,5 @@ export async function clearCompleted(name) {
 
 export async function getListData(name) {
 	const supabase = createClient();
-    try {
-        return await supabase.from("todos").select().eq("name", name);
-    } catch (e) {
-        return { error: "Something Went Wrong" };
-    }
+	return await supabase.from("todos").select().eq("name", name);
 }

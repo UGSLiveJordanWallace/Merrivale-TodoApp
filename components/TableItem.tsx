@@ -6,13 +6,12 @@ import { update } from "../utils/db";
 import { useRouter } from "next/navigation";
 
 type Props = ComponentProps<"tr"> & {
-    id: number;
-    list: string;
+    id?: number;
     task: string;
     completed: string;
 };
 
-export default function TodoItem({ id, list, task, completed }: Props) {
+export default function TodoItem({ id, task, completed }: Props) {
     const router = useRouter();
 
     const handleClick = async (e: any) => {

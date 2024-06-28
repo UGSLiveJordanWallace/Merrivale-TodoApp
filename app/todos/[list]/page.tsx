@@ -22,11 +22,10 @@ export default async function TodosPage({
                 <tbody>
                     {data &&
                         data.length > 0 &&
-                        data.map((val) => (
+                        data.map((val, key) => (
                             <TodoItem
-                                key={val.id}
+                                key={key}
                                 id={val.id}
-                                list={params.list}
                                 task={val.task}
                                 completed={val.is_complete}
                             />

@@ -19,6 +19,9 @@ export default function DropDown({ name }: Props) {
 
     async function getData() {
         const { data, error } = await getListData(name);
+		if (error) {
+			return setError(error.message)
+		}
         if (data) {
             setListData(data);
         }

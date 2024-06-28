@@ -18,8 +18,9 @@ export default async function ControlPanelPage() {
     const { data: lists, error } = await supabase.from("tablenames").select();
 
     const session = await supabase.auth.getSession();
-    const token = jwtDecode(session.data.session?.access_token);
-    const user_role = token?.user_role;
+	const access_token: string | undefined = session.data.session?.access_token.toString();
+    const token = jwtDecode(access_token as string);
+    const user_role = token.user_role;
 
     if (user_role !== "admin") {
         return redirect("/");
