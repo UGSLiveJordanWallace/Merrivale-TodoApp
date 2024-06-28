@@ -108,7 +108,7 @@ export default function DropDown({ name }: Props) {
                     {name}
                 </button>
                 <button
-                    onClick={(e) => handleDeleteAll(e, name)}
+                    onClick={(e) => handleDeleteAll(e, name as string)}
                     className="right-0 mr-2 size-8 mobile:size-16 desktop:size-24 wide:size-32"
                 >
                     <svg
