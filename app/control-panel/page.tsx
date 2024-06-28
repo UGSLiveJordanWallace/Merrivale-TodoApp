@@ -3,7 +3,11 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import DropDown from "@/components/DropDown";
 import CreateButton from "@/components/CreateButton";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode, type JwtPayload } from "jwt-decode";
+
+type Token = JwtPayload & {
+	user_role?: string;
+}
 
 export default async function ControlPanelPage() {
     const supabase = createClient();
@@ -19,7 +23,7 @@ export default async function ControlPanelPage() {
 
     const session = await supabase.auth.getSession();
 	const access_token: string | undefined = session.data.session?.access_token.toString();
-    const token = jwtDecode(access_token as string);
+    const token = jwtDecode<Token>(access_token as string);
     const user_role = token.user_role;
 
     if (user_role !== "admin") {
