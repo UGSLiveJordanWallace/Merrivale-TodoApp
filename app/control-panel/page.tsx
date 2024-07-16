@@ -4,10 +4,11 @@ import { redirect } from "next/navigation";
 import DropDown from "@/components/DropDown";
 import CreateButton from "@/components/CreateButton";
 import { jwtDecode, type JwtPayload } from "jwt-decode";
+import Link from "next/link";
 
 type Token = JwtPayload & {
-	user_role?: string;
-}
+    user_role?: string;
+};
 
 export default async function ControlPanelPage() {
     const supabase = createClient();
@@ -22,7 +23,8 @@ export default async function ControlPanelPage() {
     const { data: lists, error } = await supabase.from("tablenames").select();
 
     const session = await supabase.auth.getSession();
-	const access_token: string | undefined = session.data.session?.access_token.toString();
+    const access_token: string | undefined =
+        session.data.session?.access_token.toString();
     const token = jwtDecode<Token>(access_token as string);
     const user_role = token.user_role;
 
@@ -36,6 +38,12 @@ export default async function ControlPanelPage() {
                 <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
                     <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
                         <AuthButton />
+                        <Link
+                            href="/control-panel/users"
+                            className="p-3 bg-stone-200 rounded-lg"
+                        >
+                            Management
+                        </Link>
                     </div>
                 </nav>
             </div>

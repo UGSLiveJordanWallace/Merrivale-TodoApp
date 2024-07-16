@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import AuthButton from "@/components/AuthButton";
 
 export default async function Index() {
     const supabase = createClient();
@@ -11,16 +12,21 @@ export default async function Index() {
     }
 
     return (
-        <div className="flex flex-col h-screen w-full items-center gap-4 overflow-auto">
-            {data &&
-                data.length > 0 &&
-                data.map((table) => (
-                    <TodoButton
-                        key={table.id}
-                        link={`/todos/${table.table_name}`}
-                        name={`${table.table_name}`}
-                    />
-                ))}
+        <div className="flex flex-col h-screen w-full">
+            <div className="flex-initial flex flex-row justify-center items-center p-5">
+                <AuthButton />
+            </div>
+            <div className="flex-auto flex flex-col h-full w-full items-center gap-4 overflow-auto">
+                {data &&
+                    data.length > 0 &&
+                    data.map((table) => (
+                        <TodoButton
+                            key={table.id}
+                            link={`/todos/${table.table_name}`}
+                            name={`${table.table_name}`}
+                        />
+                    ))}
+            </div>
         </div>
     );
 }

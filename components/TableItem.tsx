@@ -9,15 +9,16 @@ type Props = ComponentProps<"tr"> & {
     id?: number;
     task: string;
     completed: string;
+    list: string;
 };
 
-export default function TodoItem({ id, task, completed }: Props) {
+export default function TodoItem({ id, task, completed, list }: Props) {
     const router = useRouter();
 
     const handleClick = async (e: any) => {
         e.preventDefault();
         const is_completed = !JSON.parse(completed);
-        const resp = await update(id, is_completed);
+        const resp = await update(id, is_completed, task, list);
         router.refresh();
     };
 

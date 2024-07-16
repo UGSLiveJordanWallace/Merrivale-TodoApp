@@ -28,6 +28,7 @@ export default async function TodosPage({
                                 id={val.id}
                                 task={val.task}
                                 completed={val.is_complete}
+                                list={decodeURI(params.list)}
                             />
                         ))}
                 </tbody>
