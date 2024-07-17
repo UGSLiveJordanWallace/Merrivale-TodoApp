@@ -34,7 +34,7 @@ export default async function Index() {
 function TodoButton({ link, name }: { link: string; name: string }) {
     return (
         <Link
-            className="block w-3/4 text-xl mobile:text-5xl mobile:w-1/2 text-center p-16 text-black text-5xl bg-stone-100 rounded-lg hover:bg-teal-500 hover:shadow-xl hover:rounded-none transition-all duration-300 ease-in-out"
+            className="block bg-stone-300 w-3/4 text-xl mobile:text-5xl mobile:w-1/2 text-center p-16 text-black text-5xl rounded-lg hover:bg-teal-500 hover:shadow-xl hover:rounded-none transition-all duration-300 ease-in-out"
             href={link}
         >
             {name}

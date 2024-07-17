@@ -34,11 +34,14 @@ export default function TableLog({ ...props }) {
     }, [supabase, records, setRecords]);
 
     return (
-        <div className="rounded-lg bg-stone-200 shadow-lg" {...props}>
-            <table className="table-auto border-collapse  w-full p-4">
+        <div
+            className="rounded-lg w-full bg-stone-200 shadow-lg p-2 overflow-auto"
+            {...props}
+        >
+            <table className="table-auto w-full p-4">
                 <thead>
                     <tr>
-                        <th>Email</th>
+                        <th className="font-bold text-lg">Email</th>
                         <th>List Name</th>
                         <th>Task</th>
                         <th>Date Completed</th>
@@ -49,26 +52,26 @@ export default function TableLog({ ...props }) {
                         .map((val, key) => {
                             return (
                                 <tr
-                                    className="border-t-2 border-b-2 border-slate-50"
+                                    className="border-t-2 border-b-2 border-slate-50 p-2"
                                     key={key}
                                 >
-                                    <td>
-                                        <h3 className="block text-center">
+                                    <td className="p-1">
+                                        <h3 className="font-bold text-lg text-center">
                                             {val.email}
                                         </h3>
                                     </td>
-                                    <td>
-                                        <h3 className="block text-center">
+                                    <td className="p-1">
+                                        <h3 className="text-center">
                                             {val.list}
                                         </h3>
                                     </td>
-                                    <td>
-                                        <h3 className="block text-center">
+                                    <td className="min-w-52 p-1">
+                                        <h3 className="text-center text-pretty">
                                             {val.task}
                                         </h3>
                                     </td>
-                                    <td>
-                                        <h3 className="block text-center">
+                                    <td className="min-w-44 p-1">
+                                        <h3 className="text-center">
                                             {val.date}
                                         </h3>
                                     </td>
@@ -78,7 +81,12 @@ export default function TableLog({ ...props }) {
                         .reverse()}
                 </tbody>
             </table>
-            <Link href="/control-panel/users/logs">See All</Link>
+            <Link
+                href="/control-panel/users/logs"
+                className="inline-block bg-white mt-2 p-1 rounded-lg"
+            >
+                See All
+            </Link>
         </div>
     );
 }

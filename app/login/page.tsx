@@ -57,7 +57,7 @@ export default function LoginPage({
                         Password
                     </label>
                     <input
-                        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                        className="rounded-md px-4 py-2 bg-inherit border border-black mb-6"
                         type="password"
                         name="password"
                         placeholder="••••••••"
@@ -65,14 +65,14 @@ export default function LoginPage({
                     />
                     <SubmitButton
                         formAction={signIn}
-                        className="bg-green-700 rounded-md px-4 py-2 text-foreground"
+                        className="bg-green-700 rounded-md px-4 py-2"
                         pendingText="Signing In..."
                     >
                         Sign In
                     </SubmitButton>
                     <SubmitButton
                         formAction={signUp}
-                        className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"
+                        className="bg-blue-400 rounded-md px-4 py-2 mb-2"
                         pendingText="Signing Up..."
                     >
                         Sign Up

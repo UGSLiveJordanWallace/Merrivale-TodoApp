@@ -31,15 +31,19 @@ export default async function UserManagementPage() {
 
     return (
         <div className="flex flex-col h-screen w-full">
-            <nav className="flex-initial flex flex-row justify-center items-center gap-4">
-                <AuthButton />
-                <Link
-                    href="/control-panel"
-                    className="p-3 bg-stone-200 rounded-lg"
-                >
-                    Control Panel
-                </Link>
-            </nav>
+            <div className="flex-initial w-full">
+                <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+                    <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+                        <AuthButton />
+                        <Link
+                            href="/control-panel"
+                            className="p-3 bg-stone-200 rounded-lg"
+                        >
+                            Control Panel
+                        </Link>
+                    </div>
+                </nav>
+            </div>
             <div className="flex-auto h-full">
                 <div className="flex flex-col justify-center h-full p-5">
                     <TableLog />
