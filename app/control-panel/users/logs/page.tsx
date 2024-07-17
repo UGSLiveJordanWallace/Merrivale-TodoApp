@@ -22,7 +22,7 @@ export default function AllLogsPage() {
     const supabase = createClient();
     const [records, setRecords] = useState<Record[]>([]);
     const [startPage, setStartPage] = useState<number>(0);
-    const [count, setCount] = useState<number>(0);
+    const [dataLength, setCount] = useState<number>(0);
     const router = useRouter();
 
     useEffect(() => {
@@ -50,6 +50,10 @@ export default function AllLogsPage() {
         validateUser();
 
         async function getData() {
+            if (startPage < 0 || startPage > dataLength) {
+                setStartPage(0);
+            }
+
             const { data, count, error } = await supabase
                 .from("logs")
                 .select("*", { count: "exact" })
@@ -66,9 +70,9 @@ export default function AllLogsPage() {
     }, [supabase, startPage, setStartPage]);
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen w-full p-10 overflow-y-auto">
-            <div className="bg-stone-300 rounded-lg w-full shadow-lg">
-                <table className="table-auto border-collapse w-full p-4">
+        <div className="flex flex-col justify-center items-center h-screen w-full p-10">
+            <div className="bg-stone-300 rounded-lg w-full shadow-lg p-4 overflow-auto">
+                <table className="table-auto w-full">
                     <thead className="text-2xl">
                         <tr>
                             <th>Email</th>
@@ -85,24 +89,26 @@ export default function AllLogsPage() {
                                         className="border-t-2 border-slate-100 text-lg"
                                         key={key}
                                     >
-                                        <td>
-                                            <h3 className="block text-center">
+                                        <td className="p-1">
+                                            <h3 className="font-bold text-lg text-center">
                                                 {val.email}
                                             </h3>
                                         </td>
-                                        <td>
-                                            <h3 className="block text-center">
+                                        <td className="p-1">
+                                            <h3 className="text-center">
                                                 {val.list}
                                             </h3>
                                         </td>
-                                        <td>
-                                            <h3 className="block text-center">
+                                        <td className="min-w-52 p-1">
+                                            <h3 className="text-center text-pretty">
                                                 {val.task}
                                             </h3>
                                         </td>
-                                        <td>
-                                            <h3 className="block text-center">
-                                                {val.created_at}
+                                        <td className="min-w-44 p-1">
+                                            <h3 className="text-center">
+                                                {new Date(
+                                                    Date.parse(val.created_at),
+                                                ).toString()}
                                             </h3>
                                         </td>
                                     </tr>
@@ -119,7 +125,7 @@ export default function AllLogsPage() {
                     </button>
                     <button
                         className="m-2 p-3 bg-white shadow-lg rounded hover:bg-stone-500"
-                        onClick={() => setStartPage(startPage + 10)}
+                        onClick={() => setStartPage(startPage - 10)}
                     >
                         Back
                     </button>
@@ -133,9 +139,10 @@ export default function AllLogsPage() {
                         className="m-2 p-3 bg-white shadow-lg rounded hover:bg-stone-500"
                         onClick={() =>
                             setStartPage(
-                                count % 10 === 0
-                                    ? count - 10
-                                    : Math.floor((count as number) / 10) * 10,
+                                dataLength % 10 === 0
+                                    ? dataLength - 10
+                                    : Math.floor((dataLength as number) / 10) *
+                                          10,
                             )
                         }
                     >
