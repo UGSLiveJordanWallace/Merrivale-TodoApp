@@ -1,14 +1,19 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import AuthButton from "@/components/AuthButton";
+import { redirect } from "next/navigation";
 
 export default async function Index() {
     const supabase = createClient();
     const { data, error } = await supabase.from("tablenames").select();
 
     if (error) {
-        console.log(error);
-        return <pre>Hello World</pre>;
+        return (
+			<>
+				<h1>Contact Developer To Wake Up Database</h1>
+				<pre>{error.message}</pre>
+			</>
+		)
     }
 
     return (
